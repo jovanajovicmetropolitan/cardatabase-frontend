@@ -27,3 +27,9 @@ jobs:
       # 4. Push na Docker Hub
       - name: Push Docker image
         run: docker push jovanajovicmetropolitan/cardatabase-frontend:latest
+
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_FRONTEND_SERVICE_ID }}/deploys" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"

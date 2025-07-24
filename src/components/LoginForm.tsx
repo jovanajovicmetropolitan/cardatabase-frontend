@@ -11,9 +11,11 @@ export const LoginForm = ({ onLogin }: { onLogin: () => void }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
+
   const handleLogin = async () => {
     try {
-      const response = await axios.post<LoginResponse>('http://localhost:8080/api/auth/login', {
+      const response = await axios.post<LoginResponse>(API_BASE_URL +'/login', {
         usernameOrEmail,
         password,
       });
@@ -28,9 +30,9 @@ export const LoginForm = ({ onLogin }: { onLogin: () => void }) => {
     <div>
       <Typography variant="h6">Prijava</Typography>
       <TextField label="Korisničko ime ili email" fullWidth margin="dense"
-                 value={usernameOrEmail} onChange={e => setUsernameOrEmail(e.target.value)} />
+        value={usernameOrEmail} onChange={e => setUsernameOrEmail(e.target.value)} />
       <TextField label="Lozinka" fullWidth margin="dense" type="password"
-                 value={password} onChange={e => setPassword(e.target.value)} />
+        value={password} onChange={e => setPassword(e.target.value)} />
       {error && <Typography color="error">{error}</Typography>}
       <Button variant="contained" onClick={handleLogin}>Prijavi se</Button>
     </div>
