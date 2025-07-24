@@ -15,7 +15,7 @@ export const LoginForm = ({ onLogin }: { onLogin: () => void }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post<LoginResponse>(API_BASE_URL +'/login', {
+      const response = await axios.post<LoginResponse>(API_BASE_URL +'/auth/login', {
         usernameOrEmail,
         password,
       });
